@@ -103,21 +103,38 @@ public class Chapter1Exercises {
         return newArr;
     }
 
-    public static ArrayList<ArrayList<Integer>> mergeOverlappingIntervals(ArrayList<Integer>[] arr) {
+    public static ArrayList<ArrayList<Integer>> mergeOverlappingIntervals(ArrayList<ArrayList<Integer>> arr) {
         ArrayList<ArrayList<Integer>> newArr = new ArrayList<ArrayList<Integer>>(0);
-        for(int index=0; index < arr.length-1; index++) {
-            ArrayList<Integer> oneRange = new ArrayList<Integer>(2);
-            if(arr[index].get(1) > arr[index+1].get(0)) {
-                oneRange.add(arr[index].get(0));
-                oneRange.add(arr[index+1].get(1));
+        for(int index=0; index < arr.size(); index++) {
+            ArrayList<Integer> oneRange = new ArrayList<>();
+            if(index == arr.size()-1) {
+                oneRange.add(arr.get(index).get(0));
+                oneRange.add(arr.get(index).get(1));
+            } else if(arr.get(index).get(1) > arr.get(index+1).get(0)) {
+                oneRange.add(arr.get(index).get(0));
+                oneRange.add(arr.get(index+1).get(1));
                 index++;
             } else {
-                oneRange.add(arr[index].get(0));
-                oneRange.add(arr[index].get(1));
+                oneRange.add(arr.get(index).get(0));
+                oneRange.add(arr.get(index).get(1));
             }
             newArr.add(oneRange);
         }
+        if(checkForOverlappingRanges(newArr)) {
+            newArr = mergeOverlappingIntervals(newArr);
+        }
 
         return newArr;
+    }
+
+    public static Boolean checkForOverlappingRanges(ArrayList<ArrayList<Integer>> arr) {
+        for(int index=0; index < arr.size(); index++) {
+            if(index == arr.size()-1) {
+                return false;
+            } else if(arr.get(index).get(1) > arr.get(index+1).get(0)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
