@@ -227,4 +227,16 @@ public class Chapter1Exercises {
 
         return array;
     }
+
+    public static ArrayList<Integer> findDuplicateElements(int[] array) {
+        ArrayList<Integer> arrayList = new ArrayList();
+        for(int element=0; element<array.length; element++) {
+            for(int secElement=0; secElement<array.length; secElement++) {
+                if(array[element]==array[secElement] && element!=secElement && !arrayList.contains(array[secElement])) {
+                    arrayList.add(array[secElement]);
+                }
+            }
+        }
+        return arrayList;
+    }
 }

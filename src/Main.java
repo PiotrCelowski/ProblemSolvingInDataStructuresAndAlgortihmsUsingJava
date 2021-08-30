@@ -3,11 +3,11 @@ import java.util.zip.CheckedInputStream;
 
 public class Main {
     public static void main(String[] args) {
-        int[] array = new int[]{0,1,0,1,0};
-        int[] newArray = Chapter1Exercises.segregate2and0and1optimized(array);
+        int[] array = new int[]{0,1,0,1,0,2,2};
+        ArrayList<Integer> newArray = Chapter1Exercises.findDuplicateElements(array);
 
-        for(int i=0; i<newArray.length; i++) {
-            System.out.println(newArray[i]);
+        for(int i=0; i<newArray.size(); i++) {
+            System.out.println(newArray.get(i));
         }
     }
 }
