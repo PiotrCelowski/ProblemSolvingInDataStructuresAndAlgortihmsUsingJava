@@ -137,4 +137,94 @@ public class Chapter1Exercises {
         }
         return false;
     }
+
+    public static int[] reverseArray(int[] array) {
+        for(int i=0, j=array.length-1; i<j; i++, j--) {
+            int placeHolder = array[i];
+            array[i] = array[j];
+            array[j]= placeHolder;
+        }
+        return array;
+    }
+
+    public static int[] segregate0and1optimized(int[] array) {
+        int arrayEndingIndex = checkEndOfZeroAndOnes(array);
+        for(int start=0, end=arrayEndingIndex; start<end; start++, end--) {
+            if(array[start] == 1 && array[end] == 0) {
+                int placeHolder = array[start];
+                array[start]=array[end];
+                array[end]=placeHolder;
+            } else if(array[start] == 0 && array[end] == 0) {
+                array = addEndAtStartAndMoveElements(array, start, end);
+            } else if(array[start] == 1 && array[end] == 1) {
+                array = addStartAtEndAndMoveElements(array, start, end);
+            }
+        }
+        if(!checkIfSorted(array)){
+            segregate0and1optimized(array);
+        }
+        return array;
+    }
+
+    public static int[] addEndAtStartAndMoveElements(int[] array, int start, int end) {
+        int lastElementPlaceholder = array[end];
+        for(int i=end; i>=start; i--) {
+            if(i==start) {
+                array[i] = lastElementPlaceholder;
+                return array;
+            }
+
+            array[i]=array[i-1];
+        }
+        return array;
+    }
+
+    public static int[] addStartAtEndAndMoveElements(int[] array, int start, int end) {
+        int firstElementPlaceholder = array[0];
+        for(int i=start; i<end; i++) {
+            array[i]=array[i+1];
+            if(i == end) {
+                array[i] = firstElementPlaceholder;
+                return array;
+            }
+        }
+        return array;
+    }
+
+    public static Boolean checkIfSorted(int[] array) {
+        for(int i=array.length-1; i>0; i--) {
+            if(array[i] < array[i-1]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static int checkEndOfZeroAndOnes(int[] array) {
+        for(int i=0; i<array.length; i++) {
+            if(array[i] > 1) {
+                return i-1;
+            }
+        }
+        return array.length-1;
+    }
+
+    public static int[] segregate2and0and1optimized(int[] array) {
+        for(int start=0, end=array.length-1; start<=end; start++, end--) {
+            if(array[start] == 2 && array[end] != 2) {
+                int placeHolder = array[start];
+                array[start]=array[end];
+                array[end]=placeHolder;
+            } else if(array[start] == 2 && array[end] == 2) {
+                array = addStartAtEndAndMoveElements(array, start, end);
+            }
+        }
+        segregate0and1optimized(array);
+
+        if(!checkIfSorted(array)){
+            segregate0and1optimized(array);
+        }
+
+        return array;
+    }
 }
