@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -238,5 +240,32 @@ public class Chapter1Exercises {
             }
         }
         return arrayList;
+    }
+
+    public static void findDuplicateElementsHashTable(int[] array) {
+        Hashtable<Integer, Integer> hashTable = new Hashtable<>();
+        for (int element = 0; element < array.length; element++) {
+            if (!hashTable.containsKey(array[element])) {
+                hashTable.put(array[element], 1);
+            } else {
+                System.out.println(array[element]);
+            }
+        }
+    }
+
+    public static void findDuplicateElementsOptimized(int[] array) {
+        int largerstElement = findLargestElementInArray(array);
+        int[] duplicatesArray = new int[largerstElement+1];
+        Arrays.fill(duplicatesArray, 0);
+
+        for (int element = 0; element < array.length; element++) {
+            duplicatesArray[array[element]] += 1;
+        }
+
+        for (int element = 0; element < duplicatesArray.length; element++) {
+            if (duplicatesArray[element] > 1) {
+                System.out.println(element);
+            }
+        }
     }
 }
