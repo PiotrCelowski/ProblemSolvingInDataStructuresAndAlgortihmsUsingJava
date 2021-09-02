@@ -268,4 +268,33 @@ public class Chapter1Exercises {
             }
         }
     }
+
+    public static void findMaxElementInSortedArray(int[] array, int minimumIndex, int maximumIndex, int initialMamElement) {
+        int maxElement = initialMamElement;
+        int pivot = findPivot(array, minimumIndex, maximumIndex);
+
+        if(maxElement < array[pivot]) {
+            maxElement = array[pivot];
+            findMaxElementInSortedArray(array, pivot, maximumIndex, maxElement);
+        } else {
+            System.out.println(maxElement);
+        }
+    }
+
+    public static int findPivot(int[] array, int minimumIndex, int maximumIndex) {
+        if(maximumIndex < minimumIndex) {
+            return -1;
+        } else if (minimumIndex == maximumIndex) {
+            return minimumIndex;
+        }
+
+        int middleIndex = (minimumIndex + maximumIndex) / 2;
+        if(array[minimumIndex] >= array[middleIndex]) {
+            findPivot(array, minimumIndex, middleIndex);
+        } else if (array[minimumIndex] > array[maximumIndex]) {
+            
+        }
+
+        return middleIndex+1;
+    }
 }
