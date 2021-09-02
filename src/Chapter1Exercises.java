@@ -289,12 +289,14 @@ public class Chapter1Exercises {
         }
 
         int middleIndex = (minimumIndex + maximumIndex) / 2;
-        if(array[minimumIndex] >= array[middleIndex]) {
+        if(array[minimumIndex] > array[maximumIndex] && array[middleIndex] > array[middleIndex+1]) {
             findPivot(array, minimumIndex, middleIndex);
-        } else if (array[minimumIndex] > array[maximumIndex]) {
-            
+        } else if(array[minimumIndex] > array[maximumIndex] && array[middleIndex] < array[middleIndex+1]) {
+            findPivot(array, middleIndex, maximumIndex);
+        } else {
+            return middleIndex;
         }
 
-        return middleIndex+1;
+        return middleIndex;
     }
 }
