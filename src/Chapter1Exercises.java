@@ -299,4 +299,62 @@ public class Chapter1Exercises {
 
         return middleIndex;
     }
+
+    public static void findTwoElementsThatSumsUp(int[] array, int value) {
+        bubbleSort(array);
+
+        int foundIndex = 0;
+        for(int index=0; index<array.length; index++) {
+            if(array[index] >= value) {
+                foundIndex = index;
+                break;
+            }
+            foundIndex = array.length-1;
+        }
+
+        for(int index=0; index<=foundIndex; index++) {
+            for(int nextIndex=0; nextIndex<=foundIndex; nextIndex++) {
+                if(index != nextIndex) {
+                    int sum = array[index] + array[nextIndex];
+                    if(sum == value) {
+                        System.out.println("Found elements: " + array[index] + ", " + array[nextIndex]);
+                        break;
+                    }
+                }
+            }
+        }
+
+    }
+
+    public static void bubbleSort(int[] array) {
+        for(int index=0; index<array.length-1; index++) {
+            if(array[index] > array[index+1]) {
+                int temp = array[index];
+                array[index] = array[index+1];
+                array[index+1] = temp;
+            }
+        }
+        if(!checkIfSorted(array)) {
+            bubbleSort(array);
+        }
+    }
+
+    public static void findTwoElementsThatSumsUpHashTable(int[] array, int value) {
+        Hashtable<Integer, ArrayList<Integer>> hashtable = new Hashtable<>(array.length);
+        for(int index=0; index<array.length; index++) {
+            for(int nextIndex=0; nextIndex<array.length; nextIndex++) {
+                int sum = array[index] + array[nextIndex];
+                ArrayList indexes = new ArrayList<Integer>(2);
+                indexes.add(index);
+                indexes.add(nextIndex);
+                hashtable.put(sum, indexes);
+            }
+        }
+
+        if(hashtable.containsKey(value)) {
+            System.out.println("Found: " + array[hashtable.get(value).get(0)] + ", " + array[hashtable.get(value).get(1)]);
+        }
+    }
+
+
 }
