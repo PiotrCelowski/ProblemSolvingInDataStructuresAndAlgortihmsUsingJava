@@ -3,8 +3,9 @@ import java.util.zip.CheckedInputStream;
 
 public class Main {
     public static void main(String[] args) {
-        int[] array = new int[]{3,4,1,2};
-        Chapter1Exercises.findTwoElementsThatSumsUpHashTable(array, 7);
+        int[] array = new int[]{321,41,1,2223};
+        int value = 3;
+        Chapter1Exercises.computeSumOf(value);
 
 //        for(int i=0; i<newArray.size(); i++) {
 //            System.out.println(newArray.get(i));

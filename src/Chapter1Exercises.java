@@ -356,5 +356,32 @@ public class Chapter1Exercises {
         }
     }
 
+    public static void sumElements(int[] array) {
+        int[] sumArray = new int[array.length];
+        for(int index=0; index < array.length; index++) {
+            int number = 1;
+            int fullNumber = array[index];
+            int sum = 0;
+            while(number > 0) {
+                number = fullNumber % 10;
+                sum += number;
+                fullNumber = fullNumber / 10;
+            }
+            sumArray[index] = sum;
+        }
+        for(int index=0; index < array.length; index++) {
+            System.out.println(sumArray[index]);
+        }
+    }
+
+    public static void computeSumOf(int number) {
+        int sum=0;
+        while(number>0) {
+            sum+=number;
+            number--;
+        }
+        System.out.println(sum);
+    }
+
 
 }
